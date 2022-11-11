@@ -25,3 +25,9 @@ function splitString(stringValue,delimeter){
     array.push(tmp);
     return array;
 }
+
+module.exports = {
+    objectToArray:objectToArray,
+    objectArrayToArray: objectArrayToArray,
+    splitString:splitString
+};
