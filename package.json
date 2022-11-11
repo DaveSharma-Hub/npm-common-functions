@@ -1,5 +1,5 @@
 {
-  "name": "@davesharma/npm-common-functions-package",
+  "name": "@atomic-packages/common-functions",
   "version": "1.0.1",
   "description": "",
   "main": "index.js",
