@@ -26,8 +26,34 @@ function splitString(stringValue,delimeter){
     return array;
 }
 
+function findInArray(array,element){
+    return array.find((item)=>item===element);
+}
+
+function findInObjectArray(array,item){
+    let value = null;
+    Object.entries(array).map((element)=>{
+        value = Object.entries(element[1]).find(
+        (eachElement)=>eachElement[1]===item)
+    })
+    return value;
+}
+
+function findInObject(objectValue,item){
+    return Object.entries(objectValue).find((element)=>
+        element[1]===item)
+}
+
+function keyExists(objectValue,key){
+   return Object.entries(objectValue).find((element)=>
+        element[0]===key)
+}
 module.exports = {
     objectToArray:objectToArray,
     objectArrayToArray: objectArrayToArray,
-    splitString:splitString
+    splitString:splitString,
+    findInArray:findInArray,
+    findInObjectArray:findInObjectArray,
+    findInObject:findInObject,
+    keyExists: keyExists
 };
