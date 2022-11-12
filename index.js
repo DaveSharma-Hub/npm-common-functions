@@ -30,11 +30,15 @@ function findInArray(array,element){
     return array.find((item)=>item===element);
 }
 
-function findInObjectArray(array,item){
-    let value = null;
-    Object.entries(array).map((element)=>{
-        value = Object.entries(element[1]).find(
-        (eachElement)=>eachElement[1]===item)
+function findExactInObjectArray(array,item){
+    let value = [];
+    array.map((element)=>{
+        const objectMatch = Object.entries(element).filter((eachItem)=>
+            eachItem[1]===item
+        )
+        if(objectMatch.length>0) {
+            value.push(element);
+        }
     })
     return value;
 }
@@ -48,12 +52,49 @@ function keyExists(objectValue,key){
    return Object.entries(objectValue).find((element)=>
         element[0]===key)
 }
+
+/*
+objectArray : aray of objects
+func : function comparison that accepts a currentValue and compareValue 
+    eg. function comp(currentValue,compareValue){
+          return currentValue>=compareValue ? true : false;
+        }
+compareValue : value comparing with specified value in array
+key : which value based on the key in the array object you want to compare
+*/
+function comparison(objectArray,func,compareValue,key){ // func accepts 2 arguments as comparison
+    const tmp = Object.entries(objectArray).filter((item)=>
+        item[1][key] ? func(item[1][key],compareValue) : false);
+    let array = [];
+    tmp.map((eachItem)=>array.push(eachItem[1]));
+    return array;
+}
+
+function sortObjectArray(objectArray,key){
+    let tmp = [];
+    let arrayMap = {};
+    Object.entries(objectArray).map((item)=>{
+        if(item[1][key]){
+            arrayMap[item[1][key]] = item[1];
+            tmp.push(item[1][key]);
+        }
+    });
+    tmp.sort();
+    let sortedArray = [];  
+    tmp.map((item)=>{
+        sortedArray.push(arrayMap[item]);
+    })
+    return sortedArray;
+}
+
 module.exports = {
     objectToArray:objectToArray,
     objectArrayToArray: objectArrayToArray,
     splitString:splitString,
     findInArray:findInArray,
-    findInObjectArray:findInObjectArray,
+    findExactInObjectArray:findExactInObjectArray,
     findInObject:findInObject,
-    keyExists: keyExists
+    keyExists: keyExists,
+    comparison:comparison,
+    sortObjectArray:sortObjectArray
 };
