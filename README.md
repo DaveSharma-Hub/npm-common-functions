@@ -18,7 +18,7 @@ npm i @atomic-packages/common-functions
 ## Usage
 
 Eg: Using the 
-```bash
+```javascript
 const commonFunction = require('@atomic-packages/common-functions'); // at top of file require the package
 
 const objectExample ={
